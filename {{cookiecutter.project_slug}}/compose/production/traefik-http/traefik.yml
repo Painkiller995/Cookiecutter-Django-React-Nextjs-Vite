@@ -1,0 +1,96 @@
+log:
+  level: INFO
+
+entryPoints:
+  web:
+    # http
+    address: ":80"
+    http:
+      # https://docs.traefik.io/routing/entrypoints/#entrypoint
+      redirections:
+        entryPoint:
+          to: web-secure
+
+  web-secure:
+    # https
+    address: ":443"
+  {%- if cookiecutter.use_celery == 'y' %}
+
+  flower:
+    address: ':5555'
+  {%- endif %}
+http:
+  routers:
+    web-secure-router:
+      rule: "PathPrefix(`/services/`)"
+      entryPoints:
+        - web-secure
+      middlewares:
+        - csrf
+      service: django
+
+    {%- if cookiecutter.use_celery == 'y' %}
+
+    flower-secure-router:
+      rule: "PathPrefix(`/task-manager/`)"
+      entryPoints:
+        - flower
+      service: flower
+    {%- endif %}
+
+    {%- if cookiecutter.use_nextjs == 'y' %}
+
+    nextjs-secure-router:
+      rule: "PathPrefix(`/`)"
+      entryPoints:
+        - web-secure
+      service: nextjs
+    {%- endif %}
+
+    # Router for serving web assets (HTTP and HTTPS)
+    web-assets-router:
+      rule: "PathPrefix(`/`)"
+      entryPoints:
+        - web-secure
+      middlewares:
+        - csrf
+      service: nginx
+
+  middlewares:
+    csrf:
+      # https://docs.traefik.io/master/middlewares/headers/#hostsproxyheaders
+      # https://docs.djangoproject.com/en/dev/ref/csrf/#ajax
+      headers:
+        hostsProxyHeaders: ["X-CSRFToken"]
+
+  services:
+    # Load balancer configuration for the Django backend service
+    django:
+      loadBalancer:
+        servers:
+          - url: http://django:5000
+    {%- if cookiecutter.use_celery == 'y' %}
+
+    flower:
+      loadBalancer:
+        servers:
+          - url: http://flower:5555
+    {%- endif %}
+    
+    nextjs:
+      loadBalancer:
+        servers:
+          - url: http://nextjs:3000
+
+    # Load balancer configuration for serving Django media files
+    nginx:
+      loadBalancer:
+        servers:
+          - url: http://nginx:80
+
+
+providers:
+  # https://docs.traefik.io/master/providers/file/
+  file:
+    filename: /etc/traefik/traefik.yml
+    watch: true
