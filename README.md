@@ -88,6 +88,10 @@ Encountering issues with Cookiecutter Django? Don't hesitate to [open an issue](
    npm create vite@latest ./frontend
    ```
 
+   Follow the prompts to set up your frontend project.
+
+   configure **vite.config.ts**
+
    ```javascript
    // vite.config.ts
    import { defineConfig } from "vite";
@@ -106,8 +110,6 @@ Encountering issues with Cookiecutter Django? Don't hesitate to [open an issue](
      },
    });
    ```
-
-   Follow the prompts to set up your frontend project.
 
 6. Initialize a Git repository, add your code, and push to your chosen remote:
 
