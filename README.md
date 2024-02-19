@@ -64,16 +64,22 @@ Encountering issues with Cookiecutter Django? Don't hesitate to [open an issue](
    npx create-next-app@latest ./frontend
    ```
 
-   Add the following configuration to your `next.config.js` file:
+   Configure hot-reloading by adding the following to your `next.config.js` file:
 
    ```javascript
    // next.config.js
-   /* @type {import('next').NextConfig} */
-   const nextConfig = {
-     output: "standalone", // Configures Next.js to produce a standalone build
-   };
+   /** @type {import('next').NextConfig} */
+   const nextConfig = { output: "standalone" };
 
-   module.exports = nextConfig;
+   export default nextConfig;
+   ```
+
+   If you're on Windows, ensure proper hot-reloading by adding the following to your `local.yml` file:
+
+   ```yaml
+   # local.yml
+   environment:
+     - WATCHPACK_POLLING=true
    ```
 
    If you are using **Vite**:
