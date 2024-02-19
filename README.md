@@ -123,7 +123,7 @@ For local development and deployment instructions, refer to:
 
 - [Developing Locally using Docker](https://cookiecutter-django.readthedocs.io/en/latest/developing-locally-docker.html) (based on django-cookiecutter documentation)
 
-## Frontend and Backend Routes
+## Frontend and Backend Routes🌐
 
 By default, this project is configured with the following routes:
 
@@ -132,11 +132,15 @@ By default, this project is configured with the following routes:
 
 Feel free to customize these routes based on your project requirements.
 
-## Not a React developer?
+## Next.js Kick Start Template 🚀
+
+Looking for a customizable Next.js template with authentication pages, custom layouts, dark mode, and more? Check out [Shadcn/ui - Next.js Template](https://github.com/Painkiller995/Shadcnui-Next.js-Template). Integrate it seamlessly with this project for a powerful full-stack development experience.
+
+## Not a React developer? 🚫
 
 If you're not working with React, no worries! The frontend is separated and not tightly coupled to the backend. Feel free to delete the content of the frontend folder and use your favorite Vite template. Just make sure to use the same commands in the package.json file for "dev" and "build".
 
-## What's on the Horizon
+## What's on the Horizon 🔮
 
 - Incorporating django-allauth/Djoser (Optional Feature) 🔐
 
