@@ -143,3 +143,7 @@ If you're not working with React, no worries! The frontend is separated and not 
 ## License 📄
 
 This project is governed by the terms and conditions specified in the [License](LICENSE) file.
+
+**Project Visitors**
+
+![Project Visitors](https://profile-counter.glitch.me/Cookiecutter-Django-React-Nextjs-Vite/count.svg)
