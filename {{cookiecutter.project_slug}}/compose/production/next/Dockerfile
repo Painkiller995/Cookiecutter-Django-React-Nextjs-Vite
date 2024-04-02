@@ -18,8 +18,10 @@ RUN \
 
 COPY ./frontend/src ./src
 COPY ./frontend/public ./public
-COPY ./frontend/next.config.js .
+COPY ./frontend/next.config.* .
 COPY ./frontend/tsconfig.json .
+COPY ./frontend/tailwind.config.* .
+COPY ./frontend/postcss.config.* .
 
 # Environment variables must be present at build time
 # https://github.com/vercel/next.js/discussions/14030
